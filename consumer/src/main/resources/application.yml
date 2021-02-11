@@ -1,0 +1,12 @@
+spring.main.web-application-type: NONE
+
+petstore.url: http://localhost:8701
+
+feign:
+  client:
+    config:
+      petstore:
+        requestInterceptors:
+          - com.pictet.training_springcloud.consumer.feign.PPAuthInterceptor
+        defaultRequestHeaders:
+          SPPAUTH: usercookie

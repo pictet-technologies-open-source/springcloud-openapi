@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.pictet.training_springcloud</groupId>
+        <artifactId>training_springcloud</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>contract</artifactId>
+
+    <dependencies>
+
+        <!-- Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- String Cloud Wiremock -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-contract-wiremock</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-contract-spec-java</artifactId>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-contract-maven-plugin</artifactId>
+
+                <executions>
+                    <execution>
+                        <id>generate-wiremock-json</id>
+
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>convert</goal>
+                            <goal>generateStubs</goal>
+                        </goals>
+
+                        <configuration>
+                            <contractsDirectory>src/main/resources/contracts</contractsDirectory>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+            <!-- Docker for wiremock -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-mappings</id>
+
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/target/stubs/META-INF/${project.groupId}/${project.artifactId}/${project.version}/mappings</directory>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${project.build.outputDirectory}/wiremock/mappings</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.13</version>
+            </plugin>
+
+        </plugins>
+    </build>
+
+
+</project>

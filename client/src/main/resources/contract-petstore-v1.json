@@ -1,0 +1,172 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "petstore",
+      "description": "The petstore API"
+    }
+  ],
+  "paths": {
+    "/api/pet": {
+      "get": {
+        "tags": [
+          "petstore"
+        ],
+        "summary": "Get all pets",
+        "description": "Get all pets in the store",
+        "operationId": "getAllPets",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "petstore"
+        ],
+        "summary": "Delete a pet by id",
+        "description": "Delete a pet by id if it exists",
+        "operationId": "addPet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pet"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pet/{id}": {
+      "get": {
+        "tags": [
+          "petstore"
+        ],
+        "summary": "Get a pet by id",
+        "description": "Get a pet by id if it exists",
+        "operationId": "getPetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the pet to be obtained. Cannot be empty",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "petstore"
+        ],
+        "summary": "Delete a pet by id",
+        "description": "Delete a pet by id if it exists",
+        "operationId": "deletePetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the pet to be deleted. Cannot be empty",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pet": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier of the Pet.",
+            "format": "int32",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the Pet.",
+            "example": "Rantanplan"
+          }
+        }
+      }
+    }
+  }
+}
