@@ -42,43 +42,43 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-contract-maven-plugin</artifactId>
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.cloud</groupId>-->
+<!--                <artifactId>spring-cloud-contract-maven-plugin</artifactId>-->
 
-                <executions>
-                    <execution>
-                        <phase>generate-test-sources</phase>
-                        <goals>
-                            <goal>generateTests</goal>
-                        </goals>
-                    </execution>
-                </executions>
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>generate-test-sources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>generateTests</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
 
-                <configuration>
-                    <contractsMode>LOCAL</contractsMode>
+<!--                <configuration>-->
+<!--                    <contractsMode>LOCAL</contractsMode>-->
 
-                    <contractDependency>
-                        <groupId>com.pictet.training_springcloud</groupId>
-                        <artifactId>contract</artifactId>
-                    </contractDependency>
+<!--                    <contractDependency>-->
+<!--                        <groupId>com.pictet.training_springcloud</groupId>-->
+<!--                        <artifactId>contract</artifactId>-->
+<!--                    </contractDependency>-->
 
-                    <incrementalContractTests>false</incrementalContractTests>
+<!--                    <incrementalContractTests>false</incrementalContractTests>-->
 
-                    <includedFiles>
-                        <includedFile>*.groovy</includedFile>
-                    </includedFiles>
+<!--                    <includedFiles>-->
+<!--                        <includedFile>*.groovy</includedFile>-->
+<!--                    </includedFiles>-->
 
-                    <baseClassForTests>
-                        com.pictet.training_springcloud.producer.BaseTestClass
-                    </baseClassForTests>
+<!--                    <baseClassForTests>-->
+<!--                        com.pictet.training_springcloud.producer.BaseTestClass-->
+<!--                    </baseClassForTests>-->
 
-                    <testFramework>JUNIT5</testFramework>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+<!--                    <testFramework>JUNIT5</testFramework>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
 </project>

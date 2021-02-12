@@ -6,12 +6,8 @@ import java.util.Objects;
 
 public class Pet {
 
-    @Schema(description = "Unique identifier of the Pet.",
-            example = "1", required = true)
     private Integer id;
 
-    @Schema(description = "Name of the Pet.",
-            example = "Rantanplan", required = true)
     private String name;
 
     public Pet() {

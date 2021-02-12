@@ -21,7 +21,6 @@ import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
 @RestController
 @RequestMapping("/api/pet")
-@Tag(name = "petstore", description = "The petstore API")
 public class PetStoreController {
 
     private Map<Integer, Pet> petStore = new ConcurrentHashMap<>();
@@ -29,16 +28,11 @@ public class PetStoreController {
         petStore.put(1, new Pet(1, "Rantanplan"));
     }
 
-    @Operation(summary = "Get all pets", description = "Get all pets in the store", tags = { "pet" })
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "successful operation",
-                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Pet.class)))) })
     @GetMapping(produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
     public Collection<Pet> getAllPets() {
         return petStore.values();
     }
 
-    @Operation(summary = "Get a pet by id", description = "Get a pet by id if it exists", tags = { "pet" })
     @GetMapping(value = "/{id}", produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
     public Pet getPetById(
             @Parameter(description="Id of the pet to be obtained. Cannot be empty", required=true)
@@ -49,7 +43,6 @@ public class PetStoreController {
         return this.petStore.get(id);
     }
 
-    @Operation(summary = "Delete a pet by id", description = "Delete a pet by id if it exists", tags = { "pet" })
     @DeleteMapping(value = "/{id}", produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
     public void deletePetById(
             @Parameter(description = "Id of the pet to be deleted. Cannot be empty", required = true)
@@ -57,7 +50,6 @@ public class PetStoreController {
         this.petStore.remove(id);
     }
 
-    @Operation(summary = "Delete a pet by id", description = "Delete a pet by id if it exists", tags = { "pet" })
     @PostMapping
     public Pet addPet(@RequestBody Pet pet) {
         if (pet.getId() == null) {
